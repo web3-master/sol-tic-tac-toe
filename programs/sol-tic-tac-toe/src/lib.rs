@@ -1,4 +1,10 @@
+mod errors;
+mod state;
+
 use anchor_lang::prelude::*;
+use errors::TicTacToeError;
+use state::game::*;
+
 
 declare_id!("EPrJwhiyKRits37fRmPhnpCSduZ4XKJDZXnBQs87J5Fu");
 
