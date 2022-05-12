@@ -31,9 +31,9 @@ impl Game {
                 row: 0..=2,
                 col: 0..=2
             } => 
-                match self.board[tile.row][tile.col] {
+                match self.board[tile.row as usize][tile.col as usize] {
                     Some(_) => return Err(TicTacToeError::TileAlreadySet.into()),
-                    None => self.board[tile.row][tile.col] = Sign::from_usize(self.current_player_index()),
+                    None => self.board[tile.row as usize][tile.col as usize] = Sign::from_usize(self.current_player_index()),
                 }
             ,
             _ => return Err(TicTacToeError::TileOutOfBounds.into()),
@@ -43,9 +43,7 @@ impl Game {
         self.update_state();
 
         // Change turn.
-        if self.state == GameState::Active {
-            self.turn += 1;
-        }
+        self.turn += 1;
 
         return Ok(());
     }
@@ -95,7 +93,7 @@ impl Game {
             self.board[first.0][first.1] == self.board[third.0][third.1];
     }
 
-    fn current_player(&self) -> Pubkey {
+    pub fn current_player(&self) -> Pubkey {
         return self.players[self.current_player_index()];
     }
 }
@@ -119,6 +117,6 @@ pub enum GameState {
 
 #[derive(AnchorSerialize, AnchorDeserialize)]
 pub struct Tile {
-    row: usize,
-    col: usize
+    row: u8,
+    col: u8
 }

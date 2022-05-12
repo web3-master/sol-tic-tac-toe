@@ -6,4 +6,5 @@ pub enum TicTacToeError {
     GameAlreadyOver,
     TileOutOfBounds,
     TileAlreadySet,
+    NotPlayerTurn,
 }
